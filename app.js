@@ -7,11 +7,11 @@ const resetButton = document.querySelector('.btn__reset');
 // Game resources
 const missed = 0;
 const phrases = [
-    'Phrase 1', 
-    'Phrase 1', 
-    'Phrase 3', 
-    'Phrase 4', 
-    'Phrase 5'
+    'Phrase one', 
+    'Phrase two', 
+    'Phrase three', 
+    'Phrase four', 
+    'Phrase five'
 ];
 
 // Start game
