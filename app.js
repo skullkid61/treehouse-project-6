@@ -27,13 +27,26 @@ qwerty.addEventListener('click', (e) => {
     }
 });
 
+// Work out how to collect one of the array values at random
+// Refer to random number game for this
 
 
 
-// function getRandomAsPhraseArray(arr){
-//     //do stuff to any arr that is passed in 
-// }; 
-// getRandomPhraseAsArray(phrases);
+// Work out a way to collect the characters and spaces from the array items
+// and store them in their own divs (most likely using createElement and
+// appendChild)
+
+
+function getRandomPhraseAsArray(arr){
+    const random = Math.floor(Math.random() * arr.length );
+    const randomPhrase = arr[random];
+    return randomPhrase.split('');
+}; 
+getRandomPhraseAsArray(phrases);
+
+
+// Remember to store a wrong guess as = -1 because that is the value returned when
+// the item is NOT indexed in the array
 
 // function addPhraseToDisplay(arr){
 //     // do stuff any arr that is passed in, and add to `#phrase ul`
