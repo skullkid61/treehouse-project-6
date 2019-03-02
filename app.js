@@ -37,21 +37,33 @@ qwerty.addEventListener('click', (e) => {
 // appendChild)
 
 
-function getRandomPhraseAsArray(arr){
-    const random = Math.floor(Math.random() * arr.length );
-    const randomPhrase = arr[random];
-    return randomPhrase.split('');
-}; 
-getRandomPhraseAsArray(phrases);
 
 
 // Remember to store a wrong guess as = -1 because that is the value returned when
 // the item is NOT indexed in the array
 
-// function addPhraseToDisplay(arr){
-//     // do stuff any arr that is passed in, and add to `#phrase ul`
-    
-// }
+function addPhraseToDisplay(arr){
+    function getRandomPhraseAsArray(arr){
+        const random = Math.floor(Math.random() * arr.length );
+        const randomPhrase = arr[random];
+        const phraseArray = randomPhrase.split('');
+        return phraseArray;
+    }; 
+    const phraseArray = getRandomPhraseAsArray(phrases);
+    // do stuff any arr that is passed in, and add to `#phrase ul`
+    for (let i = 0; i < phraseArray.length; i++) {
+        const li = document.createElement('li');
+        li.textContent = phraseArray[i];
+        phrase.appendChild(li);
+        let phraseCharacter = phraseArray[i];
+        if ( phraseCharacter === ' ' ) {
+            li.classList.add('space');
+        } else {
+            li.classList.add('letter');
+        }
+    }
+}
+addPhraseToDisplay(phrases);
 
 // const phraseArray = getRandomPhraseAsArray(phrases);
 // addPhrasetoDisplay(phraseArray); 
