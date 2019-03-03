@@ -27,6 +27,7 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
+  font-family: 'Open Sans', sans-serif;
 }
 
 li, ol, ul {
@@ -95,6 +96,17 @@ button {
 .show {
   color: #000;
   background-color: #76CE82;
+}
+
+/* Stop user being able to see the phrase by highlighting text */
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 /* Keyboard */

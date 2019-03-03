@@ -7,11 +7,11 @@ const resetButton = document.querySelector('.btn__reset');
 // Game resources
 const missed = 0;
 const phrases = [
-    'Phrase one', 
-    'Phrase two', 
-    'Phrase three', 
-    'Phrase four', 
-    'Phrase five'
+    'Show me the money', 
+    'Rock Lobster', 
+    'Live Love Laugh', 
+    'Dental plan', 
+    'Exceeds Expectations'
 ];
 
 // Start game
@@ -19,28 +19,6 @@ resetButton.addEventListener('click', () => {
     overlay.style.display = 'none';
 });
 
-// First test - get keys on keyboard to register to the console!
-qwerty.addEventListener('click', (e) => {
-    const keyLetter = e.target.textContent;
-    if (e.target.tagName === 'BUTTON') {
-        console.log(keyLetter);
-    }
-});
-
-// Work out how to collect one of the array values at random
-// Refer to random number game for this
-
-
-
-// Work out a way to collect the characters and spaces from the array items
-// and store them in their own divs (most likely using createElement and
-// appendChild)
-
-
-
-
-// Remember to store a wrong guess as = -1 because that is the value returned when
-// the item is NOT indexed in the array
 
 function addPhraseToDisplay(arr){
     function getRandomPhraseAsArray(arr){
@@ -53,20 +31,41 @@ function addPhraseToDisplay(arr){
     // do stuff any arr that is passed in, and add to `#phrase ul`
     for (let i = 0; i < phraseArray.length; i++) {
         const li = document.createElement('li');
-        li.textContent = phraseArray[i];
-        phrase.appendChild(li);
+        const ul = phrase.querySelector('ul');
+        // The text content might be added only when guessed correctly to stop cheating
+        ul.appendChild(li);        
         let phraseCharacter = phraseArray[i];
         if ( phraseCharacter === ' ' ) {
             li.classList.add('space');
         } else {
             li.classList.add('letter');
         }
+        li.textContent = phraseArray[i].toUpperCase();
     }
 }
 addPhraseToDisplay(phrases);
+const phraseLI = phrase.querySelectorAll('li.letter');
 
-// const phraseArray = getRandomPhraseAsArray(phrases);
-// addPhrasetoDisplay(phraseArray); 
+// Log the guesses
+
+qwerty.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+        const guess = e.target.textContent;
+        const guessUpper = guess.toUpperCase();
+        e.target.disabled = true;
+        for (let i = 0; i < phraseLI.length; i++) {
+            if (guessUpper === phraseLI[i].textContent) {
+                phraseLI[i].classList.add('show');
+            }
+        }
+    }
+});
+
+
+
+// Remember to store a wrong guess as = -1 because that is the value returned when
+// the item is NOT indexed in the array
+
 
 // // Count the missed guesses in the game
 // function checkLetter(/* add parameter for the key clicked */){
