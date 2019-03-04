@@ -1,22 +1,29 @@
 // Items on page
 const overlay = document.getElementById('overlay');
+const screenTitle = overlay.querySelector('h2');
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 const resetButton = document.querySelector('.btn__reset');
+const scoreBoard = document.getElementById('scoreboard');
 
 // Game resources
 let missed = 0;
+let correct = 0;
 const phrases = [
-    'Show me the money', 
-    'Rock Lobster', 
-    'Live Love Laugh', 
-    'Dental plan', 
-    'Exceeds Expectations'
+    'why so serious',
+    'hello newman',
+    'show me the money',
+    'hasta la vista',
+    'suit up'
 ];
 
 // Start game
-resetButton.addEventListener('click', () => {
-    overlay.style.display = 'none';
+resetButton.addEventListener('click', (e) => {
+    if (e.target.textContent === 'Start Game') {
+        overlay.classList.add('hidden');
+    } else if (e.target.textContent === 'Play Again') {
+        document.location.reload(true);
+    }
 });
 
 
@@ -45,6 +52,31 @@ function addPhraseToDisplay(arr){
 addPhraseToDisplay(phrases);
 const phraseLI = phrase.querySelectorAll('li.letter');
 
+function removeHeart() {
+    const liveHeart = scoreBoard.querySelectorAll('[src="images/liveHeart.png"]')[0];
+    liveHeart.src = "images/lostHeart.png";
+};
+
+function loseScreen() {
+    overlay.classList.remove('hidden');
+    overlay.classList.replace('start', 'lose');
+    screenTitle.textContent = 'You lose!';
+    resetButton.textContent = 'Play Again';
+}
+
+function winScreen() {
+    overlay.classList.remove('hidden');
+    overlay.classList.replace('start', 'win');
+    screenTitle.textContent = 'You win!';
+    resetButton.textContent = 'Play Again';
+}
+
+function checkWin() {
+    if (missed >= 5) {
+        loseScreen();
+    }
+};
+
 // Log the guesses
 let negative = 0;
 qwerty.addEventListener('click', (e) => {
@@ -56,15 +88,23 @@ qwerty.addEventListener('click', (e) => {
         for (let i = 0; i < phraseLI.length; i++) {
             if (guessUpper === phraseLI[i].textContent) {
                 phraseLI[i].classList.add('show');
+                correct += 1;
+                if (correct === phraseLI.length) {
+                    winScreen();
+                }
             } else {
                 negative += 1;
                 if (negative === phraseLI.length) {
                     missed += 1;
+                    removeHeart();
+                    checkWin();
                 }
             }
         }
     }
 });
+
+
 
 
 
@@ -88,6 +128,3 @@ qwerty.addEventListener('click', (e) => {
 // Pass checkLetter function and store the letter in the variable letterFound
 
 
-function checkWin(){
-    // check if you have won
-};

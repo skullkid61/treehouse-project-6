@@ -56,10 +56,6 @@ button {
   transition: var(--transition);
 }
 
-button:disabled {
-  color: var(--color-neutral-light);
-}
-
 .main-container {
   display: flex;
   flex-direction: column;
@@ -100,6 +96,7 @@ button:disabled {
 .show {
   color: #000;
   background-color: #76CE82;
+  transition: 1s;
 }
 
 /* Stop user being able to see the phrase by highlighting text */
@@ -120,7 +117,7 @@ button:disabled {
   justify-content: center;
 }
 
-.chosen {
+button:disabled {
   background: var(--color-neutral);
   border-radius: 5px;
   font-size: var(--font-size-medium);
@@ -176,4 +173,9 @@ button:disabled {
 
 .lose a {
   color: var(--color-lose);
+}
+
+.hidden {
+  display: none !important;
+  transition: 1s;
 }
