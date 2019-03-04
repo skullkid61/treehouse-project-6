@@ -56,6 +56,10 @@ button {
   transition: var(--transition);
 }
 
+button:disabled {
+  color: var(--color-neutral-light);
+}
+
 .main-container {
   display: flex;
   flex-direction: column;

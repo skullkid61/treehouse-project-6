@@ -5,7 +5,7 @@ const phrase = document.getElementById('phrase');
 const resetButton = document.querySelector('.btn__reset');
 
 // Game resources
-const missed = 0;
+let missed = 0;
 const phrases = [
     'Show me the money', 
     'Rock Lobster', 
@@ -32,7 +32,7 @@ function addPhraseToDisplay(arr){
     for (let i = 0; i < phraseArray.length; i++) {
         const li = document.createElement('li');
         const ul = phrase.querySelector('ul');
-        // The text content might be added only when guessed correctly to stop cheating
+        li.textContent = phraseArray[i].toUpperCase();
         ul.appendChild(li);        
         let phraseCharacter = phraseArray[i];
         if ( phraseCharacter === ' ' ) {
@@ -40,26 +40,32 @@ function addPhraseToDisplay(arr){
         } else {
             li.classList.add('letter');
         }
-        li.textContent = phraseArray[i].toUpperCase();
     }
 }
 addPhraseToDisplay(phrases);
 const phraseLI = phrase.querySelectorAll('li.letter');
 
 // Log the guesses
-
+let negative = 0;
 qwerty.addEventListener('click', (e) => {
     if (e.target.tagName === 'BUTTON') {
         const guess = e.target.textContent;
         const guessUpper = guess.toUpperCase();
         e.target.disabled = true;
+        negative = 0;
         for (let i = 0; i < phraseLI.length; i++) {
             if (guessUpper === phraseLI[i].textContent) {
                 phraseLI[i].classList.add('show');
+            } else {
+                negative += 1;
+                if (negative === phraseLI.length) {
+                    missed += 1;
+                }
             }
         }
     }
 });
+
 
 
 
