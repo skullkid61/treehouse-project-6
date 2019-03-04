@@ -97,6 +97,7 @@ button {
   color: #000;
   background-color: #76CE82;
   transition: 1s;
+  transform: rotate(360deg);
 }
 
 /* Stop user being able to see the phrase by highlighting text */
@@ -145,6 +146,7 @@ button:disabled {
   left: 0;
   right: 0;
   border-radius: 5px;
+  z-index: 1000;
 }
 
 .title {
@@ -177,5 +179,4 @@ button:disabled {
 
 .hidden {
   display: none !important;
-  transition: 1s;
 }

@@ -7,6 +7,8 @@ const resetButton = document.querySelector('.btn__reset');
 const scoreBoard = document.getElementById('scoreboard');
 
 // Game resources
+const lose = 'lose';
+const win = 'win';
 let missed = 0;
 let correct = 0;
 const phrases = [
@@ -57,23 +59,19 @@ function removeHeart() {
     liveHeart.src = "images/lostHeart.png";
 };
 
-function loseScreen() {
-    overlay.classList.remove('hidden');
-    overlay.classList.replace('start', 'lose');
-    screenTitle.textContent = 'You lose!';
+function endGame(result) {
+    overlay.classList.replace('start', result);
+    screenTitle.textContent = 'You ' + result +'!';
     resetButton.textContent = 'Play Again';
-}
-
-function winScreen() {
     overlay.classList.remove('hidden');
-    overlay.classList.replace('start', 'win');
-    screenTitle.textContent = 'You win!';
-    resetButton.textContent = 'Play Again';
-}
+};
 
 function checkWin() {
     if (missed >= 5) {
-        loseScreen();
+        endGame(lose);
+    } else if (correct === phraseLI.length) {
+        
+        endGame(win);
     }
 };
 
@@ -89,9 +87,7 @@ qwerty.addEventListener('click', (e) => {
             if (guessUpper === phraseLI[i].textContent) {
                 phraseLI[i].classList.add('show');
                 correct += 1;
-                if (correct === phraseLI.length) {
-                    winScreen();
-                }
+                checkWin();
             } else {
                 negative += 1;
                 if (negative === phraseLI.length) {
@@ -103,28 +99,5 @@ qwerty.addEventListener('click', (e) => {
         }
     }
 });
-
-
-
-
-
-
-// Remember to store a wrong guess as = -1 because that is the value returned when
-// the item is NOT indexed in the array
-
-
-// // Count the missed guesses in the game
-// function checkLetter(/* add parameter for the key clicked */){
-    
-// }
-
-
-
-
-
-
-// Add event listener to the keyboard
-// When player chooses a letter, add class 'chosen' to the selection and disable the button so that the letter cannot be chosen twice (disabled attribute to be found in MDN)
-// Pass checkLetter function and store the letter in the variable letterFound
 
 
