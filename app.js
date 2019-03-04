@@ -70,7 +70,6 @@ function checkWin() {
     if (missed >= 5) {
         endGame(lose);
     } else if (correct === phraseLI.length) {
-        
         endGame(win);
     }
 };
